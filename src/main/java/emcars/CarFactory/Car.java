@@ -1,13 +1,21 @@
 package emcars.CarFactory;
 
+import org.hibernate.annotations.Cascade;
+
 import java.util.List;
 import javax.persistence.*;
+
+@Entity
 public class Car {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String name;
 	private Double engineCapacity;
 	private Enum engine;
+	@OneToMany
+	@Cascade(org.hibernate.annotations.CascadeType.ALL)
 	private List<Equipment> equipments;
 	private Integer price;
 
