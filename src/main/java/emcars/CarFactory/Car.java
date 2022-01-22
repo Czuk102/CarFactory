@@ -14,15 +14,17 @@ public class Car {
 	private String name;
 	private Double engineCapacity;
 	private Enum engine;
+
+
 	@OneToMany
 	@Cascade(org.hibernate.annotations.CascadeType.ALL)
 	private List<Equipment> equipments;
-	private Integer price;
+	private Double price;
 
 	public Car() {
 	}
 
-	public Car(Integer id, String name, Double engineCapacity, Enum engine, List<Equipment> equipments, Integer price) {
+	public Car(Integer id, String name, Double engineCapacity, Enum engine, List<Equipment> equipments, Double price) {
 		this.id = id;
 		this.name = name;
 		this.engineCapacity = engineCapacity;
@@ -37,6 +39,14 @@ public class Car {
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	public Double getPrice() {
+		return price;
+	}
+
+	public void setPrice(Double price) {
+		this.price = price;
 	}
 
 	public String getName() {

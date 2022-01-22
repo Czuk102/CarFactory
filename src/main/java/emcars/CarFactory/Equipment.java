@@ -10,12 +10,12 @@ public class Equipment {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String name;
-	private Integer price;
+	private Double price;
 
 	@ManyToOne
 	private Car car;
 
-	public Equipment(Integer id, String name, Integer price) {
+	public Equipment(Integer id, String name, Double price) {
 		this.id = id;
 		this.name = name;
 		this.price = price;
@@ -41,11 +41,11 @@ public class Equipment {
 		this.name = name;
 	}
 
-	public Integer getPrice() {
+	public Double getPrice() {
 		return price;
 	}
 
-	public void setPrice(Integer price) {
+	public void setPrice(Double price) {
 		this.price = price;
 	}
 }
