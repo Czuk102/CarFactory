@@ -2,8 +2,8 @@ package emcars.CarFactory;
 
 import org.hibernate.annotations.Cascade;
 
-import java.util.List;
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Car {
@@ -13,7 +13,7 @@ public class Car {
 	private Integer id;
 	private String name;
 	private Double engineCapacity;
-	private Enum engine;
+	private Engine engine;
 
 
 	@OneToMany
@@ -24,8 +24,16 @@ public class Car {
 	public Car() {
 	}
 
-	public Car(Integer id, String name, Double engineCapacity, Enum engine, List<Equipment> equipments, Double price) {
+	public Car(Integer id, String name, Double engineCapacity, Engine engine, List<Equipment> equipments, Double price) {
 		this.id = id;
+		this.name = name;
+		this.engineCapacity = engineCapacity;
+		this.engine = engine;
+		this.equipments = equipments;
+		this.price = price;
+	}
+
+	public Car(String name, Double engineCapacity, Engine engine, List<Equipment> equipments, Double price) {
 		this.name = name;
 		this.engineCapacity = engineCapacity;
 		this.engine = engine;
@@ -65,11 +73,11 @@ public class Car {
 		this.engineCapacity = engineCapacity;
 	}
 
-	public Enum getEngine() {
+	public Engine getEngine() {
 		return engine;
 	}
 
-	public void setEngine(Enum engine) {
+	public void setEngine(Engine engine) {
 		this.engine = engine;
 	}
 

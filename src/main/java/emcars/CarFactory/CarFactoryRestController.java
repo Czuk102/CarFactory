@@ -1,6 +1,8 @@
 package emcars.CarFactory;
 
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -9,6 +11,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/car")
 public class CarFactoryRestController {
+	Logger logger = LoggerFactory.getLogger(CarFactoryRestController.class);
 
 	private final CarFactoryService carFactoryService;
 	public CarFactoryRestController(CarFactoryService carFactoryService){
@@ -17,6 +20,7 @@ public class CarFactoryRestController {
 
 	@GetMapping
 	public ResponseEntity<String> helloWorld() {
+		logger.info("użyłeś endpointa helloWold");
 		return ResponseEntity.ok("Hello world");
 	}
 
@@ -34,16 +38,17 @@ public class CarFactoryRestController {
 		return ResponseEntity.ok(carFactoryService.deleteById(id));}
 
 	@GetMapping("/all")
-	public ResponseEntity<List> findAll(){
-		return  ResponseEntity.ok(carFactoryService.findAll());
+	public ResponseEntity<List<?>> findAll() {
+		return ResponseEntity.ok(carFactoryService.findAll());
 	}
 
 	@GetMapping("/topfive")
-	public ResponseEntity<List> getTopFiveCars(){
-		return  ResponseEntity.ok(carFactoryService.getTopFiveCars());
+	public ResponseEntity<List<?>> getTopFiveCars() {
+		return ResponseEntity.ok(carFactoryService.getTopFiveCars());
 	}
-	@GetMapping("/finalPrice/")
-	public ResponseEntity<Double> getFinalPricebyId(@PathVariable Integer id){
+
+	@GetMapping("/finalPrice/{id}")
+	public ResponseEntity<Double> getFinalPricebyId(@PathVariable Integer id) {
 		return ResponseEntity.ok(carFactoryService.getFinalPrice(carFactoryService.findById(id)));
 	}
 }
