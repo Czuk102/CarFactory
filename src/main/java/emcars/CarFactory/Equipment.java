@@ -12,7 +12,7 @@ public class Equipment {
 	private String name;
 	private Double price;
 
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	private Car car;
 
 	public Equipment(Integer id, String name, Double price) {

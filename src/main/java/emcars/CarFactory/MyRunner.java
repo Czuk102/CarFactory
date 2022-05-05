@@ -18,7 +18,7 @@ public class MyRunner implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) {
-		repo.save(new Car("Mazda", 12000d, Engine.DIESEL, Collections.emptyList(), 200000d));
+		repo.save(new Car("Mazda", 1200d, Engine.DIESEL, Collections.emptyList(), 200000d));
 		LOGGER.info("My app is up and running...");
 	}
 }

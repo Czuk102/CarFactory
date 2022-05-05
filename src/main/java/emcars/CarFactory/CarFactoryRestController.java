@@ -9,45 +9,58 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/car")
+@RequestMapping()
 public class CarFactoryRestController {
 	Logger logger = LoggerFactory.getLogger(CarFactoryRestController.class);
 
 	private final CarFactoryService carFactoryService;
-	public CarFactoryRestController(CarFactoryService carFactoryService){
+
+	public CarFactoryRestController(CarFactoryService carFactoryService) {
 		this.carFactoryService = carFactoryService;
 	}
 
-	@GetMapping
+	@GetMapping("/hello")
 	public ResponseEntity<String> helloWorld() {
 		logger.info("użyłeś endpointa helloWold");
 		return ResponseEntity.ok("Hello world");
 	}
 
-	@PostMapping("/makeCar")
-	public ResponseEntity<Car> makeCar(){
+	@PostMapping("/cars/makeCar")
+	public ResponseEntity<Car> makeCar() {
 		return ResponseEntity.ok(carFactoryService.makeCar());
 	}
 
-	@GetMapping("/{id}")
-	public ResponseEntity<Car> getById(@PathVariable Integer id){
+	@PostMapping("/cars")
+	public ResponseEntity<Car> makeCar(@RequestBody Car car) {
+		return ResponseEntity.ok(carFactoryService.makeCar(car));
+	}
+
+	@PutMapping("/cars/{id}")
+	public ResponseEntity<Car> updateCar(@PathVariable Integer id, @RequestBody Car carDetails) {
+		return ResponseEntity.ok(carFactoryService.updateCar(id, carDetails));
+	}
+
+	@GetMapping("/cars/{id}")
+	public ResponseEntity<Car> getById(@PathVariable Integer id) {
 		return ResponseEntity.ok(carFactoryService.findById(id));
 	}
-	@GetMapping("/delete/{id}")
-	public ResponseEntity<Void> deleteByid(@PathVariable Integer id){
-		return ResponseEntity.ok(carFactoryService.deleteById(id));}
 
-	@GetMapping("/all")
-	public ResponseEntity<List<?>> findAll() {
+	@DeleteMapping("/cars/{id}")
+	public ResponseEntity<Void> deleteByid(@PathVariable Integer id) {
+		return ResponseEntity.ok(carFactoryService.deleteById(id));
+	}
+
+	@GetMapping("/cars/all")
+	public ResponseEntity<List<Car>> findAll() {
 		return ResponseEntity.ok(carFactoryService.findAll());
 	}
 
-	@GetMapping("/topfive")
-	public ResponseEntity<List<?>> getTopFiveCars() {
+	@GetMapping("/cars/topfive")
+	public ResponseEntity<List<Car>> getTopFiveCars() {
 		return ResponseEntity.ok(carFactoryService.getTopFiveCars());
 	}
 
-	@GetMapping("/finalPrice/{id}")
+	@GetMapping("/cars/finalPrice/{id}")
 	public ResponseEntity<Double> getFinalPricebyId(@PathVariable Integer id) {
 		return ResponseEntity.ok(carFactoryService.getFinalPrice(carFactoryService.findById(id)));
 	}
